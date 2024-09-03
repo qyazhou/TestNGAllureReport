@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -19,7 +20,12 @@ public class BaseTest {
     @BeforeClass
     public void classLevelSetup() {
         Log.info("Tests are starting!");
-        driver = new ChromeDriver();
+        // 设置 ChromeDriver 的路径
+        System.setProperty("webdriver.chrome.driver", "d:\\automation\\chromedriver_win32\\chromedriver.exe");
+        // 创建一个Chrome浏览器实例
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @BeforeMethod

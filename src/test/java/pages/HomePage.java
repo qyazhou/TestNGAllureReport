@@ -15,27 +15,38 @@ public class HomePage extends BasePage {
     /**
      * Variables
      */
-    String baseURL = "http://www.n11.com/";
+    String baseURL = "https://www.nuro.jp/app/nurohikari-directolsu-mansion/area/#building-input";
 
     /**
      * Web Elements
      */
-    By signInButtonClass = By.className("btnSignIn");
-
+    By inputZip = By.id("input-zip");
+    By searchZip = By.id("search-zip");
+    By townList = By.id("town-list");
     /**
      * Page Methods
      */
     //Go to Homepage
-    public HomePage goToN11() {
-        Log.info("Opening N11 Website.");
+    public HomePage goToHomepage() {
+        Log.info("Opening Website.");
         driver.get(baseURL);
         return this;
     }
 
-    //Go to LoginPage
-    public LoginPage goToLoginPage() {
-        Log.info("Going to Login Page..");
-        click(signInButtonClass);
-        return new LoginPage(driver);
+    //input data to Homepage
+    public HomePage inputDataToHomePage() {
+        Log.info("Input data to Home Page..");
+        writeText(inputZip, "1750082");
+        click(searchZip);
+        waitVisibility(townList);
+        //click(townList);
+        //selectDropdownByText(townList, "高島平４丁目");
+        return this;
+    }
+
+    //Go to ResultPage
+    public ResultPage goToResultpage() {
+        Log.info("Going to Result Page..");
+        return new ResultPage(driver);
     }
 }

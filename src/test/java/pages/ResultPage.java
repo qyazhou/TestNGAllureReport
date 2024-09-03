@@ -8,9 +8,9 @@ import org.openqa.selenium.WebDriver;
 import utils.logs.JSErrorLogs;
 import utils.logs.Log;
 
-public class LoginPage extends BasePage {
+public class ResultPage extends BasePage {
     /**Constructor*/
-    public LoginPage(WebDriver driver) {
+    public ResultPage(WebDriver driver) {
         super(driver);
     }
 
@@ -22,8 +22,8 @@ public class LoginPage extends BasePage {
     By errorMessagePasswordXpath = By.xpath("//*[@id=\"loginForm\"]/div[2]/div/div ");
 
     /**Page Methods*/
-    public LoginPage loginToN11(String username, String password) {
-        Log.info("Trying to login the N11.");
+    public ResultPage verifyResult(String username, String password) {
+        Log.info("Trying to verify result.");
         writeText(userNameId, username);
         writeText(passwordId, password);
         click(loginButtonId);
@@ -31,7 +31,7 @@ public class LoginPage extends BasePage {
     }
 
     //Verify Username Condition
-    public LoginPage verifyLoginUserName(String expectedText) {
+    public ResultPage verifyLoginUserName(String expectedText) {
         Log.info("Verifying login username.");
         waitVisibility(errorMessageUsernameXpath);
         assertEquals(readText(errorMessageUsernameXpath), expectedText);
@@ -39,7 +39,7 @@ public class LoginPage extends BasePage {
     }
 
     //Verify Password Condition
-    public LoginPage verifyLoginPassword(String expectedText) {
+    public ResultPage verifyLoginPassword(String expectedText) {
         Log.info("Verifying login password.");
         waitVisibility(errorMessagePasswordXpath);
         assertEquals(readText(errorMessagePasswordXpath), expectedText);
@@ -47,7 +47,7 @@ public class LoginPage extends BasePage {
     }
 
     //Verify Password Condition
-    public LoginPage verifyLogError() {
+    public ResultPage verifyLogError() {
         Log.info("Verifying javascript login errors.");
         assertTrue(JSErrorLogs.isLoginErrorLog(driver));
         return this;
